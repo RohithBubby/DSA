@@ -1,0 +1,15 @@
+find the largest number that can be formed using the given elements in array
+
+sol: we need to use inbuilt sort method and pass a compare function to sort the array and then we just need to concat them
+
+function largestNumber(arr) {
+    arr = arr.map(x => x.toString()).sort((a,b) => {
+        let XY = a+b;
+        let YX = b+a;
+        return XY == YX ? 0 : (XY > YX ? -1 : 1);
+    });
+    let num = arr.join("").replace(/^[0]*/, ""); // or ar.join("")
+    return num == "" ? "0" : num;                // or num[0]=="0" ? "0" : num;
+}
+
+largestNumber([3, 30, 34, 5, 9]);
