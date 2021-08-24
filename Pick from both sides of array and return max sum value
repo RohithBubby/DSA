@@ -1,0 +1,57 @@
+
+Given an integer array A of size N.
+
+You can pick B elements from either left or right end of the array A to get maximum sum.
+Find and return this maximum possible sum.
+
+sol: first i tried with array slice method to find all possible arrays we can form and then saved sumation in new array - this solution worked but created time complexity issue
+
+so now I have used 2 pointer method where I'm saving the no.of elements need to be picked from start & end and saving in array, then having one variable to have max value and updating it when I find a new max value
+
+
+//param A : array of integers
+ //param B : integer
+ //return an integer
+	solve : function(A, B){
+        let indexes = []; // this will have arrays with no of elems need to be picked from start & end
+        indexes.push([0, A.length - (A.length-B)]);
+        for(let i=1; i<=B; i++) {
+            indexes.push([i, A.length-(A.length-(B-i))]);
+        }
+        let max = "";
+        indexes.forEach(arr => {
+            let [f, b] = arr;//f=no.of elems from start, b=no.of elems from end
+            let total = 0;
+            if(f>0) {
+                for(let i=0; i<f; i++) {
+                    total+=parseInt(A[i], 10);
+                }
+            }
+            if(b>0) {
+                for(let i=(A.length-b); i<A.length; i++) {
+                    total+=parseInt(A[i], 10);
+                }
+            }
+            if(total>max || max=="") max = total;
+        });
+        return max;
+	}
+
+    Example Input
+Input 1:
+
+ A = [5, -2, 3 , 1, 2]
+ B = 3
+Input 2:
+
+ A = [1, 2]
+ B = 1
+
+
+Example Output
+Output 1:
+
+ 8
+Output 2:
+
+ 2
