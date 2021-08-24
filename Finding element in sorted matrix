@@ -1,0 +1,39 @@
+Finding an element in matrix when each row and colum are sorted in ascending order - best case O(N+M)
+
+sol: Brute force method is to loop through each element and match for target element - O(N*M)
+other way is through binary search on evert row so - O(N log M)
+
+
+let input = [
+[10,20,30,40,50],
+[15,25,35,45,55],
+[17,26,37,46,56],
+[27,40,58,60,71]
+];
+
+let target = 1;
+
+if(target<input[0][0] || target>input[input.length-1][input[input.length-1]-1]) {
+    console.log("Target not found");
+}
+
+let i=0, j=input[0].length-1;
+let foundTraget = false;
+
+while(i<input.length || j>=0) {
+    if(input[i][j] == target) {
+        console.log("target found", input[i][j]);
+        foundTraget = true;
+        break;
+    }
+    else if(target > input[i][j]) {
+        i++;
+    }
+    else if(target < input[i][j]) {
+        j--;
+    }
+}
+
+if(!foundTraget) {
+    console.log("Target not found");
+}
