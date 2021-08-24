@@ -1,0 +1,39 @@
+the best solution is time complexity with (O(N))
+
+sol: create 1 array to have left max value from the particular index, and create another 1 array to have  right max value from the particular index
+then take min of 2 maxValues and minus it with particular index building height
+
+
+let input = [2,3,1,4,5,2,1,7,2,9];
+
+let leftMax = [];
+let rightMax = [];
+
+leftMax[0] = input[0];
+for(let i=1; i<input.length; i++) {
+    if(leftMax[i-1]<input[i]) {
+        leftMax[i] = input[i];
+    }
+    else {
+        leftMax[i] = leftMax[i-1];
+    }
+}
+
+rightMax[input.length-1] = input[input.length-1];
+for(let i=input.length-2; i>=0; i--) {
+    if(rightMax[i+1]<input[i]) {
+        rightMax[i] = input[i];
+    }
+    else {
+        rightMax[i] = rightMax[i+1];
+    }
+}
+
+let totalUnits = 0;
+for(let i=0; i<input.length; i++) {
+   let val = (Math.min(leftMax[i-1] ? leftMax[i-1] : 0, rightMax[i+1] ? rightMax[i+1] : 0) - input[i]);
+   if(val > 0) {
+       totalUnits+=val;
+   }
+}
+console.log(totalUnits);
