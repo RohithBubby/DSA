@@ -1,0 +1,12 @@
+
+// here we can call sum method any number of times and when we don't receive any arument we need to return the sum of all arguments
+
+
+function sum(a) {
+    return function(b) {
+        return b ? sum(a+b) : a;
+    }
+}
+
+console.log(sum(2)(3)()); //5
+console.log(sum(2)(3)(5)()); //10

@@ -1,0 +1,122 @@
+AIRTEL 1st round
+
+//Q1 - reverse the array without using extra space or inbuilt method
+let a = [1,2,3,4];
+let i = 0;
+let j = a.length-1;
+while(j>i) {
+    [a[i], a[j]]=[a[j], a[i]];
+    i++;
+    j--;
+}
+
+console.log(a);
+
+//Q2 - reverse all the words in the string and print it
+let str = "dog cat";
+//output=god tac
+function reverseStrWords() {
+    let rev = str.split(" ").map(s => s.split("").reverse().join(""));
+    return rev.join(" ");
+}
+
+
+//Q3 - implement throttling function, which can be used from anywhere in the application
+//if an API is triggered we sould not call the same API for next 5 seconds
+
+var obj = [
+    {
+        name: "abc",
+        canExecute: true
+    }
+];
+function x(name) {
+    if(obj.find(x => x.name==name).canExecute == true) {
+    //api call --
+    obj.find(x => x.name==name).canExecute = false;
+     setTimeout(function(){ 
+        obj.find(x => x.name==name).canExecute = true;
+    }, 5000);
+    }
+}
+//method2 for Q3
+function throttle (callback) {
+let canexec  = true;
+return ()=>{
+if
+(canexec){
+}
+}
+}
+
+//Q4 - react component should have input type number, button ->on click  = should run timer based on input field value and show the count down on UI as well
+// I used for loop with setTimeout, best way could be to use setInterval
+class someComponent extends React.Component {
+
+    state={
+        inpVal: "",
+        countDown: 0
+    }
+
+    buttonClicked = () => {
+        let timer = this.state.inpVal;
+        if(timer) {
+            this.setState({countDown: timer});
+
+            for(let i=timer; i>0; i--) {
+                setTimeout(function() {
+                    timer = timer-1;
+                    this.setState({countDown: timer});
+                    if(!timer) {
+                        this.setState({inpVal: ""});
+                    }
+                }, timer*1000);
+            }
+        }
+    }
+
+    render(){
+        return(
+        <h2>{countDown}</h2>
+        <input type="number"  value={inpVal} onChange={(e)=>this.setState({inpVal: e.target.value})}/>
+        <button onClick={() => this.buttonClicked()}>Start Timer</button>
+        );
+    }
+}
+
+//Q5 - implement binary search
+function binarSearch(start, end, arr, target) {
+    let found = false;
+    while(end>start) {
+        let mid = start + Math.floor((end-start)/2);
+        if(arr[mid] == target) {
+            found = true;
+        }
+
+        if(arr[mid]<target) {
+            start = mid+1;
+        }
+
+        if(arr[mid]>target) {
+            end = mid-1;
+        }
+    }
+    return found;
+}
+
+//Q6 - given an array which has only 0's & 1's - sort them without using inbuilt methods or any new array
+let arr = [1,0,0,1,1,0];
+let zeroCount = 0;
+for(let i=0; i<arr.length; i++) {
+    if(!arr[i]){
+        zeroCount++;
+    }
+}
+for(let i=0; i<arr.length; i++) {
+    if(zeroCount>0) {
+        arr[i] = 0;
+    }
+    else {
+        arr[i] = 1;
+    }
+}

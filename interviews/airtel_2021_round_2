@@ -1,0 +1,23 @@
+//Q1 - implement a copy method in javascript which can take any type of data and returns a copy of that data;
+
+//method 1
+function copyData(data) {
+    if(typeof(data)==="object") {
+        return JSON.parse(JSON.stringify(data));
+    }
+    return data;
+}
+
+//method 2 - here I'm using object.assign - so need to makesure if this does shallow copy or deep coy - better to go with method 1 in interviews
+function copyData(data) {
+    if(typeof(data)==="object") {
+        if(Array.isArray(data)) {
+            return Object.assign([], data);
+        }
+        return Object.assign({}, data);
+    }
+    return data;
+}
+
+//Q2 - call API1 to 10 then construct request for API11 from them and call API11 - handle errors and all
+
