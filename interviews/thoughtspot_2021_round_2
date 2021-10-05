@@ -1,0 +1,59 @@
+//Q1 - find the number which is not present twice in given input
+
+let str = "5 7 2 7 5 2 5";
+let arr = str.split(" ");
+let hashMap = {};
+
+for(let i=0; i<arr.length; i++) {
+  if(hashMap.hasOwnProperty(arr[i])) {
+    hashMap[arr[i]] = hashMap[arr[i]]+1;
+  }
+  else {
+    hashMap[arr[i]] = 1;
+  }
+}
+
+for(let val in hashMap) {
+  if(hashMap[val]%2 !== 0) {
+    console.log(val);
+    break;
+  }
+}
+
+//Q2 - given arrat and target, find all the pairs which sums to target
+
+let arr = [5, 7, 1, 2, 8, 4, 3];
+let target = 10;
+
+let hashMap = {};//3
+let output = [];
+
+for(let i=0; i<arr.length; i++) {
+  if(hashMap.hasOwnProperty(target-arr[i])) {
+    output.push([target-arr[i], hashMap[target-arr[i]]]);
+  }
+  else {
+    hashMap[arr[i]] = target-arr[i];
+  }
+}
+
+if(output.length==0) {
+  console.log(`No 2 values sum up to ${target}`);
+}
+else {
+  console.log(output);  
+}
+
+//Q3 - generate a random string value which has A-Z, a-z, 0-9 
+
+let str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+let strlen = Math.random()*10;
+let output = "";
+
+for(let i=0; i<strlen; i++) {
+  let ran = Math.random()*10;
+  output += str.slice(ran, ran+1);
+}
+
+console.log(output);

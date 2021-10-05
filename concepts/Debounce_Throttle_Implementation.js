@@ -11,7 +11,8 @@ article - https://codeburst.io/throttling-and-debouncing-in-javascript-b01cad5c8
     it triggers the api/function after certain amount of time once user stops their action.
 
     example/ best suited for implementing suggesting input field 
-        - where API will be triggerd only when user stops for certain amount of time like "pausing", instead of calling on every character
+        - where API will be triggerd only when user stops for certain amount of time like "pausing", 
+          instead of calling on every character
 */
 
 const debounce = (func, delay) => {
