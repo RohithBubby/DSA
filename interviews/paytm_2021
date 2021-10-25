@@ -1,0 +1,151 @@
+
+function one() {
+  new Promise((resolve, reject) => {
+    reject("error occured!");
+  }).then(() => console.log("then block"))
+  .catch(function(error) {
+    console.log("error caught is ", error);
+  });
+}
+=====
+function one() {
+  new Promise((resolve, reject) => {
+    reject("error occured!");
+  }).catch(function(error) {
+    console.log("error caught is ", error);
+  }).then(() => console.log("then block"));
+}
+========
+ function promiseWithTimeOut() {
+   new Promise(function(resolve, reject) {
+    setTimeout(() => {
+      console.log("TimeOut")
+      throw new Error("Whoops!");
+    }, 1000);
+  }).catch(err => console.log("error occured in promise and caught = ", err));
+ } 
+-
+timeout
+error occured using javascript not promise catch
+=====
+function one() {
+    a = 20;
+    console.log(b);
+    var b = 100;
+  }
+one();
+console.log(a);
+console.log(b);
+---
+undefined
+20
+error
+========
+function setTimer () {
+    for(var i = 0; i< 5; i++){
+        let j = i+2;
+        setTimeout(() => {
+            console.log(j);
+        }, 1000);
+    }
+    console.log(i)
+}
+setTimer();
+--
+5
+2
+3
+4
+5
+6
+======
+function setTimer () {
+    for(var i = 0; i< 5; i++){
+        var j = i+2;
+        setTimeout(() => {
+            console.log(j);
+        }, 1000);
+    }
+    console.log(i)
+}
+setTimer();
+---
+5 6 6 6 6 6
+=====
+
+ar1.findIsArrayAndLength(minLength)
+// if array and more than length return "Yes it is an Array with satisfied Length"
+//else ( not an array or does not match the length) 
+return "No not a matching Array"
+fmy-odzb-buw
+
+
+Array.prototype.findIsArrayAndLength = function (minLength) {
+	if(Array.isArray(this) && this.length >= minLength) {
+  	console.log("true");
+  }
+  else {
+  console.log("false");
+  }
+}
+let arr = [1, 2, 3];
+arr.findIsArrayAndLength(6);
+
+=========
+const aryOfObj = [
+    {name:"a", score: 43},
+    {name:"c", score:28},
+    {name:"d", score:17},
+    {name:"e", score: "15"},
+    {name:"f", score:75},
+    {name:"g", score:55},
+    {name:"h", score: 2},
+    {name:"j", score:66},
+    {name:"k", score:"32"}
+];
+/* [["e","d","c", "d"], AverageScore] */
+
+/* 15-45 */
+
+function findStudents(arr, min, max) {
+let total = 0;
+let tmp = [];
+arr.forEach(student => {
+console.log(student.score);
+console.log(parseInt(student.score));
+	if(parseInt(student.score) >= min && parseInt(student.score)<max) {
+  total = total + parseInt(student.score);
+  tmp.push(student.name);
+  }
+});
+
+return [tmp, tmp.length>0 ? total/tmp.length : 0]
+
+}
+
+console.log(findStudents(aryOfObj, 15, 45));
+
+===========
+write code to get data from API and show in table and add filter functionality and sorting functionality
+https://codesandbox.io/s/sharp-lewin-p6w1n?file=/src/App.js
+//api - https://jsonplaceholder.typicode.com/users
+
+========2nd round
+explain design approach for whats app for front end
+
+explain best practices you are following
+
+how you are improving website performance
+
+error boundary in react and its usecase
+
+overflow-wrap: break-word;
+
+reverse each word in a given string and print it
+
+explain closure and give example
+
+
+
+
+
