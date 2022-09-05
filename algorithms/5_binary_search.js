@@ -1,5 +1,7 @@
 //binary search works only on sorted array
 
+// time complexity is O(log n)
+
 let arr = [1, 2, 3, 4];
 
 let start = 0;

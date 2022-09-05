@@ -1,0 +1,77 @@
+/* const aa = new Calc(10).add(10).sub(5).multiply(2);
+
+aa.add(2).equals();  // --> print result
+
+const aa = new Calc(10).add(10).sleep(2000).sub(5).sleep(1000).multiply(2);
+
+aa.equals();
+ */
+
+class Calc {
+  constructor(total) {
+    this.total = total;
+    this.timer = false;
+    this.takeActions = [];
+  }
+
+  add(param) {
+    if (this.timer) {
+      this.takeActions.push({ action: "add", val: param });
+    } else {
+      console.log("adding");
+      this.total += param;
+    }
+    return this;
+  }
+
+  sub(param) {
+    if (this.timer) {
+      this.takeActions.push({ action: "sub", val: param });
+    } else {
+      console.log("subtracting");
+      this.total -= param;
+    }
+    return this;
+  }
+
+  multiply(param) {
+    if (this.timer) {
+      this.takeActions.push({ action: "multiply", val: param });
+    } else {
+      console.log("multiplying");
+      this.total *= param;
+    }
+    return this;
+  }
+
+  sleep(delay) {
+    if (this.timer) {
+      this.takeActions.push({ action: "sleep", val: delay });
+    } else {
+      this.timer = true;
+      this.takeActions = [];
+      setTimeout(() => {
+        this.timer = false;
+        this.setTotal();
+      }, delay);
+    }
+    return this;
+  }
+
+  setTotal() {
+    this.takeActions.forEach((item) => {
+      this[item.action](item.val);
+    });
+    return this;
+  }
+
+  equals() {
+    console.log("final result = " + this.total);
+  }
+}
+
+let aa = new Calc(10).add(10).sleep(2000).sub(5).sleep(5000).multiply(2);
+aa.equals();
+setTimeout(() => {
+  aa.equals();
+}, 10000);

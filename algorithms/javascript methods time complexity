@@ -1,0 +1,37 @@
+Big O notation - Worst case complexity
+Omega notation - Best case complexity
+Theta notation - Average case complexity
+
+O(1) - calculation not dependent on size of input
+O(n) - 1 loop
+O(n^2) - nested loop
+O(log n) - input size reduced by half
+
+javascript methods 
+Object - is a collection of key value pairs
+
+Insert - O(1)
+Remove - O(1)
+Access - O(1)
+
+Search - O(n)
+Object.keys - O(n)
+Object.values - O(n)
+Object.entries - O(n)
+
+
+Array - is an ordered collection of values
+push - O(1)
+pop - O(1)
+Access - O(1)
+
+Search - O(n)
+shift - O(n)
+unshift - O(n)
+concat - O(n)
+slice - O(n)
+splice - O(n)
+forEach - O(n)
+map - O(n)
+filter - O(n)
+reduce - O(n)

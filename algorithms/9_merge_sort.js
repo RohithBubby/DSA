@@ -1,3 +1,13 @@
+/*
+
+
+  Time complexity is
+    worst -  O(n log n)
+    average - n log n
+    best - n log n
+
+*/
+
 function merge(left, right) {
   let i = 0;
   let j = 0;
@@ -27,3 +37,18 @@ function mergeSort(arr) {
 }
 
 console.log(mergeSort([4, 7, 5, 9, 1, 3, 8, 2]));
+
+// =============
+//another way of writing merge function which seems to be better
+function merge(leftArr, rightArr) {
+  const sortedArr = [];
+  while (leftArr.length && rightArr.length) {
+    if (leftArr[0] <= rightArr[0]) {
+      sortedArr.push(leftArr.shift());
+    } else {
+      sortedArr.push(rightArr.shift());
+    }
+  }
+  const resultArr = [...sortedArr, ...leftArr, ...rightArr];
+  return resultArr;
+}

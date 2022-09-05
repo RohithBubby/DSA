@@ -8,7 +8,7 @@ function largestNumber(arr) {
         let YX = b+a;
         return XY == YX ? 0 : (XY > YX ? -1 : 1);
     });
-    let num = arr.join("").replace(/^[0]*/, ""); // or ar.join("")
+    let num = arr.join("").replace(/^[0]*/, ""); // or arr.join("")
     return num == "" ? "0" : num;                // or num[0]=="0" ? "0" : num;
 }
 

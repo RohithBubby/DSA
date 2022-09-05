@@ -1,0 +1,40 @@
+//Q1 - given an array of values, how will you remove the deplicates values
+/*
+Solution 1 = use Set in javascript and pass the array to it, it will return the unique values
+Solution 1 = have a hashmap and new array and loop through each element of given array and see if it exists in hashmap, 
+if it doesn't add it to hasmap and new array else skip it
+*/
+
+
+//Q2 - given array of cows and horses, find the minimum number of swaps required to gather all cows next to eachother. position of cows doesn't matter
+/*
+Solution 1 - using frequency counter - this will not give the swap count - count the number of cows and return cows at the start and remaining as horses
+Solution 2 - hint - use cows count and find the different solutions that can be formed using the given array by placing cows in different positions and compare with original array - I was not able to find the solution by using this
+Solution 3 - sliding window - find cows count and then using that as window size find the no.of horses in each window from start to end, minimum no.of horses in all the windows i the answer
+*/
+
+let arr = ["C", "H", "C", "H", "C", "H", "C", "C"];
+
+function minSwaps(arr) {
+
+let cowCount = arr.filter(item => item.toLowerCase() == "c").length;
+
+if(arr.length == cowCount || cowCount == 0) {
+	return 0;
+}
+
+let minHCount = arr.length;
+
+for(let i=0; i<arr.length-cowCount; i++) {
+	let subArr = arr.slice(i, i+cowCount);
+  let hCount = subArr.filter(item => item.toLowerCase() == "h").length;
+  
+  if(minHCount > hCount) {
+  	minHCount = hCount;
+  }
+}
+
+return minHCount;
+}
+
+console.log(minSwaps(arr));
