@@ -1,0 +1,148 @@
+
+Array.prototype.myMap = function (callback) {
+    let result = []
+    for (let i = 0; i < this.length; i++) {
+        result.push(callback(this[i], i, this))
+    }
+    return result
+}
+
+Array.prototype.myFilter = function (callback) {
+    let result = []
+    for (let i = 0; i < result.length; i++) {
+        if (callback(this[i], i, this)) result.push(this[i])
+    }
+    return result
+}
+
+Array.prototype.myReduce = function (callback, initialValue) {
+    let accumulator = initialValue
+    for (let i = 0; i < this.length; i++) {
+        accumulator = accumulator ? callback(accumulator, this[i], i, this) : this[i]
+    }
+    return accumulator
+}
+
+Function.prototype.myCall = function (context = {}, ...args) {
+    if (typeof this !== "function") {
+        throw new Error(this + "is not callable")
+    }
+
+    context.fn = this
+    context.fn(...args)
+}
+
+Function.prototype.myApply = function (context = {}, args = []) {
+    if (typeof this !== "function") {
+        throw new Error(this + "is not callable")
+    }
+    if (!Array.isArray(args)) {
+        throw new Error(args + "is not an array object")
+    }
+
+    context.fn = this
+    context.fn(...args)
+}
+
+Function.prototype.myBind = function (context = {}, ...args) {
+    if (typeof this !== "function") {
+        throw new Error(this + "cannot be bound, as it is not callable")
+    }
+
+    context.fn = this
+    return function (...newArgs) {
+        return context.fn(...args, ...newArgs)
+    }
+}
+
+function myMemoize(func, context) {
+    const cache = {}
+    return function (...args) {
+        const keyString = JSON.stringify(args)
+        if (!cache[keyString]) {
+            cache[keyString] = func.apply(context || this, args)
+        }
+        return cache[keyString]
+    }
+}
+
+// const asyncProm = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve("success")
+//     }, 1000)
+// })
+// const syncProm = new Promise((resolve, reject) => {
+//     resolve("success")
+// })
+
+// asyncProm.then((res) => console.log(res)).catch((err) => console.error(err))
+// syncProm.then((res) => console.log(res)).catch((err) => console.error(err))
+
+// Promise.reject("test resolve failed").catch(res => console.log(res))
+
+
+function PromisePolyfill(executer) {
+    let onResolve,
+        onReject,
+        isFullfilled = false,
+        isRejected = false,
+        isCalled = false,
+        value
+
+    function resolve(val) {
+        isFullfilled = true
+        value = val
+
+        if (typeof onResolve === "function") {
+            onResolve(val)
+            isCalled = true
+        }
+    }
+
+    function reject(val) {
+        isRejected = true
+        value = val
+
+        if (typeof onReject === "function") {
+            onReject(val)
+            isCalled = true
+        }
+    }
+
+    this.then = function (callback) {
+        onResolve = callback
+
+        if (isFullfilled && !isCalled) {
+            onResolve(value)
+            isCalled = true
+        }
+        return this
+    }
+
+    this.catch = function (callback) {
+        onReject = callback
+        if (isRejected && !isCalled) {
+            onReject(value)
+            isCalled = true
+        }
+        return this
+    }
+
+    try {
+        executer(resolve, reject)
+    } catch (error) {
+        onReject(error)
+    }
+}
+
+PromisePolyfill.resolve = (value) => {
+    return new PromisePolyfill((resolve) => {
+        resolve(value)
+    })
+}
+
+PromisePolyfill.reject = (value) => {
+    return new PromisePolyfill((resolve, reject) => {
+        reject(value)
+    })
+}
